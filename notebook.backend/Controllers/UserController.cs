@@ -7,7 +7,7 @@ using notebook.backend.Models;
 
 namespace notebook.backend.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -17,21 +17,44 @@ namespace notebook.backend.Controllers
             dbContext = new notebookContext();   
         }
         // GET api/values
-        [HttpGet]
+        [HttpGet("Get")]
         public ActionResult<IEnumerable<Users>> Get()
         {
             List<Users> users = dbContext.Users.ToList();
-
             return users;
         }
 
                 // GET api/values
-        [HttpPost]
-        public ActionResult<Users> Signup(Users user)
+        [HttpPost("signup")]
+        public ActionResult<Users> SignUp(Users user)
         {
             dbContext.Users.Add(user);
             dbContext.SaveChanges();
             return user;
         }
+        [HttpPost("changepassword")]
+        public Boolean ChangePassword(long id,string oldPassword,string newPassword)
+        {
+            Users user  = dbContext.Users.Where(u => u.Id == id && u.Password==oldPassword).SingleOrDefault();
+            
+            if(user != null){
+                user.Password = newPassword;
+                dbContext.SaveChanges();
+                return true;
+            }
+           return false;
+        }
+        [HttpPost("signin")]
+        public ActionResult<Users> SingIn(string username, string password){
+            Users user= dbContext.Users.Where(u=> u.Username==username && u.Password==password).SingleOrDefault();
+            if (user!=null)
+            {
+                return user;
+            }
+            else{
+                return user;
+            }
+           
     }
+}
 }
