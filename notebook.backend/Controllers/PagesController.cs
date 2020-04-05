@@ -1,6 +1,9 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using notebook.backend.Models;
+using notebook.backend.Models.RequestModels;
 
 namespace notebook.backend.Controllers
 {
@@ -16,24 +19,46 @@ namespace notebook.backend.Controllers
              // aksi takdirde yeni işlemler için her seferinde bellkete yer açmamız gerekir. 
         }
 
-        [HttpPost("createpages")]
-        public ActionResult<Pages> CreatePages(Pages page,long FolderId){
-        dbContext.Pages.Add(page);
-        dbContext.SaveChanges();
-        return page;
+         [HttpGet("get")]
+        public ActionResult<IEnumerable<Pages>> Get()
+        {
+            List<Pages> pages = dbContext.Pages.ToList();
+            return pages;
         }
+
+        [HttpPost("createpages")]
+        public ActionResult<Pages> CreatePages([FromBody] PagesRequest pagesRequest){
+            Pages pages=new Pages();
+
+            dbContext.Pages.Where(p=> p.Id==pagesRequest.id).SingleOrDefault();
+            pages.Id = pagesRequest.folderId;
+            pages.Name = pagesRequest.name;
+            pages.CreatedOn = DateTime.Now;
+            pages.ModifiedOn = DateTime.Now;
+            dbContext.Pages.Add(pages);
+            dbContext.SaveChanges();
+            return pages;
+        }
+
         [HttpDelete("deletepages")]
-        public ActionResult<Pages> DeletePages(long id){
-            Pages pages = dbContext.Pages.Where(p=> p.Id==id).SingleOrDefault();
+        public ActionResult<Pages> DeletePages([FromBody] PagesRequest pagesRequest){
+            Pages pages = dbContext.Pages.Where(p=> p.Id==pagesRequest.id).SingleOrDefault();
             dbContext.Pages.Remove(pages);
             dbContext.SaveChanges();
             return pages;
         } 
         [HttpPost("updatepages")]
-        public ActionResult<Pages> UpdatePages(string name){
-            Pages page= dbContext.Pages.Where(f=> f.Name==name).SingleOrDefault();
-            dbContext.SaveChanges();
-            return page;
+        public Boolean UpdatePages([FromBody] PagesRequest pagesRequest){
+            Pages pages= dbContext.Pages.Where(p => p.Name==pagesRequest.oldName && p.FolderId==pagesRequest.id && p.Id==pagesRequest.folderId).SingleOrDefault();
+              
+            if(pages != null)
+            {
+                pages.Name = pagesRequest.newName;
+                dbContext.SaveChanges();
+                return true;
+            }
+            return false;
+          
         }
 
 

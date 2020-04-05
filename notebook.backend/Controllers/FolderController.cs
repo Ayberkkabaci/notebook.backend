@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using notebook.backend.Models;
+using notebook.backend.Models.RequestModels;
 
 namespace notebook.backend.Controllers
 {
@@ -16,33 +18,46 @@ namespace notebook.backend.Controllers
              // bellekte yer açıp tek bir yerde işlemleri yapmamızı sağlıyor
              // aksi takdirde yeni işlemler için her seferinde bellekte yer açmamız gerekir. 
         }
-
+        [HttpGet("get")]
+        public ActionResult<IEnumerable<Folder>> Get()
+        {
+            List<Folder> folders = dbContext.Folder.ToList();
+            return folders;
+        }
+        
         [HttpPost("createfolder")]
-        public ActionResult<Folder> CreateFolder(long userId, string name){
-            Folder folder = new notebook.backend.Models.Folder();
-            folder.UserId = userId;
-            folder.Name = name;
+        public ActionResult<Folder> CreateFolder([FromBody]FolderRequest folderRequest){
+            Folder folder = new Folder();
+            dbContext.Users.Where(u=> u.Id==folderRequest.userId).SingleOrDefault();
+            folder.UserId = folderRequest.userId;
+            folder.Id= (long)folderRequest.id;
+            folder.Name = folderRequest.name;
             folder.CreatedOn = DateTime.Now;
             folder.ModifiedOn = DateTime.Now;
             
             dbContext.Folder.Add(folder);
             dbContext.SaveChanges();
-            
             return folder;
         }
         [HttpDelete("deletefolder")]
-        public ActionResult<Folder> DeleteFolder(long id){
-            Folder folder = dbContext.Folder.Where(f=> f.Id==id).SingleOrDefault();
+        public ActionResult<Folder> DeleteFolder([FromBody]FolderRequest folderRequest){
+            Folder folder = dbContext.Folder.Where(f=> f.Id==folderRequest.id && f.UserId==folderRequest.userId).SingleOrDefault();
             dbContext.Folder.Remove(folder);
             dbContext.SaveChanges();
             return folder;
         }
         [HttpPost("updatefolder")]
-        public ActionResult<Folder> UpdateFolder(string name){
-            Folder folder= dbContext.Folder.Where(f=> f.Name==name).SingleOrDefault();
-            dbContext.SaveChanges();
-            return folder;
+        public Boolean UpdateFolder([FromBody]FolderRequest folderRequest)
+        {
+            Folder folder = dbContext.Folder.Where(f => f.Name==folderRequest.newName && f.Id==folderRequest.id && f.UserId==folderRequest.userId).SingleOrDefault();
+            return true;
+           /* if(folder != null)
+            {
+                folder.Name = folderRequest.newName;
+                dbContext.SaveChanges();
+                return true;
+            }
+            return false;*/
         }
     }
 }
-

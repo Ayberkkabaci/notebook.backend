@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using notebook.backend.Models.RequestModels;
 using notebook.backend.Models;
 
 namespace notebook.backend.Controllers
@@ -33,20 +34,20 @@ namespace notebook.backend.Controllers
             return user;
         }
         [HttpPost("changepassword")]
-        public Boolean ChangePassword(long id,string oldPassword,string newPassword)
+        public Boolean ChangePassword([FromBody]UsersRequest usersRequest)
         {
-            Users user  = dbContext.Users.Where(u => u.Id == id && u.Password==oldPassword).SingleOrDefault();
+            Users user  = dbContext.Users.Where(u => u.Id == usersRequest.id && u.Password==usersRequest.oldPassword).SingleOrDefault();
             
             if(user != null){
-                user.Password = newPassword;
+                user.Password = usersRequest.newPassword;
                 dbContext.SaveChanges();
                 return true;
             }
            return false;
         }
         [HttpPost("signin")]
-        public ActionResult<Users> SingIn(string username, string password){
-            Users user= dbContext.Users.Where(u=> u.Username==username && u.Password==password).SingleOrDefault();
+        public ActionResult<Users> SingIn([FromBody]UsersRequest usersRequest){
+            Users user= dbContext.Users.Where(u=> u.Username==usersRequest.username && u.Password==usersRequest.password).SingleOrDefault();
             if (user!=null)
             {
                 return user;
