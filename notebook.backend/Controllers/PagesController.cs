@@ -31,7 +31,8 @@ namespace notebook.backend.Controllers
             Pages pages=new Pages();
 
             dbContext.Pages.Where(p=> p.Id==pagesRequest.id).SingleOrDefault();
-            pages.Id = pagesRequest.folderId;
+            pages.FolderId = pagesRequest.folderId;
+            //pages.Id=pagesRequest.id;
             pages.Name = pagesRequest.name;
             pages.CreatedOn = DateTime.Now;
             pages.ModifiedOn = DateTime.Now;
@@ -48,16 +49,20 @@ namespace notebook.backend.Controllers
             return pages;
         } 
         [HttpPost("updatepages")]
-        public Boolean UpdatePages([FromBody] PagesRequest pagesRequest){
-            Pages pages= dbContext.Pages.Where(p => p.Name==pagesRequest.oldName && p.FolderId==pagesRequest.id && p.Id==pagesRequest.folderId).SingleOrDefault();
-              
-            if(pages != null)
-            {
-                pages.Name = pagesRequest.newName;
-                dbContext.SaveChanges();
-                return true;
-            }
-            return false;
+        public ActionResult<Pages> UpdatePages([FromBody] PagesRequest pagesRequest){
+            
+           Pages pages = dbContext.Pages.Where(p => p.Id==pagesRequest.id && p.FolderId==pagesRequest.folderId).SingleOrDefault();
+
+            pages.Name = pagesRequest.newName;
+            dbContext.SaveChanges();
+            return pages;
+           
+          
+               
+           
+           
+            
+            
           
         }
 

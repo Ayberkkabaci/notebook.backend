@@ -30,7 +30,7 @@ namespace notebook.backend.Controllers
             Folder folder = new Folder();
             dbContext.Users.Where(u=> u.Id==folderRequest.userId).SingleOrDefault();
             folder.UserId = folderRequest.userId;
-            folder.Id= (long)folderRequest.id;
+            //folder.Id= (long)folderRequest.id;
             folder.Name = folderRequest.name;
             folder.CreatedOn = DateTime.Now;
             folder.ModifiedOn = DateTime.Now;
@@ -47,17 +47,14 @@ namespace notebook.backend.Controllers
             return folder;
         }
         [HttpPost("updatefolder")]
-        public Boolean UpdateFolder([FromBody]FolderRequest folderRequest)
+        public ActionResult<Folder> UpdateFolder([FromBody]FolderRequest folderRequest)
         {
-            Folder folder = dbContext.Folder.Where(f => f.Name==folderRequest.newName && f.Id==folderRequest.id && f.UserId==folderRequest.userId).SingleOrDefault();
-            return true;
-           /* if(folder != null)
-            {
-                folder.Name = folderRequest.newName;
-                dbContext.SaveChanges();
-                return true;
-            }
-            return false;*/
+            Folder folder = dbContext.Folder.Where(f => f.Id==folderRequest.id && f.UserId==folderRequest.userId).SingleOrDefault();
+            folder.Name=folderRequest.newName;
+            dbContext.SaveChanges();
+            return folder;
+        
+
         }
     }
 }
