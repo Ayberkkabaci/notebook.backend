@@ -1,33 +1,23 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace notebook.backend.Models
 {
-    public partial class notebookContext : DbContext
+    public class NotebookContext : DbContext
     {
-        public notebookContext()
+        public NotebookContext()
         {
         }
 
-        public notebookContext(DbContextOptions<notebookContext> options)
+        public NotebookContext(DbContextOptions<NotebookContext> options)
             : base(options)
         {
         }
 
-        public virtual DbSet<Folder> Folder { get; set; }
-        public virtual DbSet<Notes> Notes { get; set; }
-        public virtual DbSet<Pages> Pages { get; set; }
-        public virtual DbSet<Users> Users { get; set; }
+        public DbSet<Folder> Folder { get; set; }
+        public DbSet<Notes> Notes { get; set; }
+        public DbSet<Pages> Pages { get; set; }
+        public DbSet<Users> Users { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseMySQL("server=78.142.210.2;port=3306;user=notebook;password=At9vq13~;database=notebook");
-            }
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

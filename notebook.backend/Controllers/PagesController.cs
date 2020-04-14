@@ -11,10 +11,10 @@ namespace notebook.backend.Controllers
     [ApiController]
     public class PagesController :ControllerBase
     {
-        private notebookContext dbContext;
+        private NotebookContext dbContext;
         public PagesController()
         {
-            dbContext = new notebookContext();  
+            dbContext = new NotebookContext();  
              // bellekte yer açıp tek bir yerde işlemleri yapmamızı sağlıyor
              // aksi takdirde yeni işlemler için her seferinde bellkete yer açmamız gerekir. 
         }

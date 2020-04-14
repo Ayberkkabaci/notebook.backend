@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\mgani\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\mgani\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_notebook.backend.-1878176210.00" t="ExcludeRecursive" />
+    <e p="C:\Users\mgani\Documents\Github\notebook.backend" t="IncludeFlat">
+      <e p="notebook.backend" t="IncludeRecursive">
+        <e p="appsettings.Development.json" t="Include" />
+        <e p="appsettings.json" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Controllers" t="Include">
+          <e p="FolderController.cs" t="Include" />
+          <e p="NotesController.cs" t="Include" />
+          <e p="PagesController.cs" t="Include" />
+          <e p="UserController.cs" t="Include" />
+          <e p="ValuesController.cs" t="Include" />
+        </e>
+        <e p="Models" t="Include">
+          <e p="Folder.cs" t="Include" />
+          <e p="notebookContext.cs" t="Include" />
+          <e p="Notes.cs" t="Include" />
+          <e p="Pages.cs" t="Include" />
+          <e p="RequestModels" t="Include">
+            <e p="FolderRequest.cs" t="Include" />
+            <e p="NotesRequest.cs" t="Include" />
+            <e p="PagesRequest.cs" t="Include" />
+            <e p="UsersRequest.cs" t="Include" />
+          </e>
+          <e p="Users.cs" t="Include" />
+        </e>
+        <e p="notebook.backend.csproj" t="IncludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="notebook.backend.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="launchSettings.json" t="Include" />
+        </e>
+        <e p="Startup.cs" t="Include" />
+      </e>
+      <e p="notebook.backend.sln" t="IncludeFlat" />
+      <e p="packages" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>

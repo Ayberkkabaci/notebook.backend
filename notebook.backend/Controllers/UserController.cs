@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using notebook.backend.Models.RequestModels;
 using notebook.backend.Models;
 
@@ -12,17 +13,16 @@ namespace notebook.backend.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private notebookContext dbContext;
-        public UserController()
+        private NotebookContext dbContext;
+        public UserController(NotebookContext ctx)
         {
-            dbContext = new notebookContext();   
+            this.dbContext = ctx;
         }
         // GET api/values
-        [HttpGet("Get")]
-        public ActionResult<IEnumerable<Users>> Get()
+        [HttpGet]
+        public IEnumerable<Users> Get()
         {
-            List<Users> users = dbContext.Users.ToList();
-            return users;
+            return dbContext.Users.Include("Folder").ToList();
         }
 
                 // GET api/values

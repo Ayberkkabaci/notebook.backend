@@ -24,9 +24,8 @@
     ".NETCoreApp,Version=v3.1": {
       "notebook.backend/1.0.0": {
         "dependencies": {
-          "Microsoft.AspNetCore.Razor.Design": "2.1.2",
-          "Microsoft.EntityFrameworkCore.Design": "2.1.1",
           "MySql.Data.EntityFrameworkCore": "8.0.13",
+          "MySql.Data.EntityFrameworkCore.Design": "8.0.19",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "3.1.0.0",
@@ -104,7 +103,7 @@
           "Microsoft.AspNetCore.StaticFiles": "3.1.0.0",
           "Microsoft.AspNetCore.WebSockets": "3.1.0.0",
           "Microsoft.AspNetCore.WebUtilities": "3.1.0.0",
-          "Microsoft.CSharp.Reference": "4.0.0.0",
+          "Microsoft.CSharp": "4.0.0.0",
           "Microsoft.Extensions.Caching.Abstractions.Reference": "3.1.0.0",
           "Microsoft.Extensions.Caching.Memory.Reference": "3.1.0.0",
           "Microsoft.Extensions.Configuration.Abstractions.Reference": "3.1.0.0",
@@ -331,8 +330,6 @@
           "lib/netstandard1.0/Google.Protobuf.dll": {}
         }
       },
-      "Microsoft.AspNetCore.Razor.Design/2.1.2": {},
-      "Microsoft.CSharp/4.5.0": {},
       "Microsoft.EntityFrameworkCore/2.1.2": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Abstractions": "2.1.2",
@@ -368,18 +365,6 @@
         }
       },
       "Microsoft.EntityFrameworkCore.Analyzers/2.1.2": {},
-      "Microsoft.EntityFrameworkCore.Design/2.1.1": {
-        "dependencies": {
-          "Microsoft.CSharp": "4.5.0",
-          "Microsoft.EntityFrameworkCore.Relational": "2.1.2"
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Design.dll": {
-            "assemblyVersion": "2.1.1.0",
-            "fileVersion": "2.1.1.18157"
-          }
-        }
-      },
       "Microsoft.EntityFrameworkCore.Relational/2.1.2": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "2.1.2"
@@ -487,6 +472,17 @@
         },
         "compile": {
           "lib/netstandard2.0/MySql.Data.EntityFrameworkCore.dll": {}
+        }
+      },
+      "MySql.Data.EntityFrameworkCore.Design/8.0.19": {
+        "runtime": {
+          "lib/net452/MySql.Data.EntityFrameworkCore.Design.dll": {
+            "assemblyVersion": "8.0.19.0",
+            "fileVersion": "8.0.19.0"
+          }
+        },
+        "compile": {
+          "lib/net452/MySql.Data.EntityFrameworkCore.Design.dll": {}
         }
       },
       "NETStandard.Library/1.6.1": {
@@ -1705,7 +1701,7 @@
         },
         "compileOnly": true
       },
-      "Microsoft.CSharp.Reference/4.0.0.0": {
+      "Microsoft.CSharp/4.0.0.0": {
         "compile": {
           "Microsoft.CSharp.dll": {}
         },
@@ -2950,20 +2946,6 @@
       "path": "google.protobuf/3.5.1",
       "hashPath": "google.protobuf.3.5.1.nupkg.sha512"
     },
-    "Microsoft.AspNetCore.Razor.Design/2.1.2": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-fe1+dpy+eM4IX1zodsvkihO1Spuj0NecfStWzvkYoMo7/ziOsqSv4vFK36ZpBfHa4gpdCEwaU46EPzdq+ZDYhQ==",
-      "path": "microsoft.aspnetcore.razor.design/2.1.2",
-      "hashPath": "microsoft.aspnetcore.razor.design.2.1.2.nupkg.sha512"
-    },
-    "Microsoft.CSharp/4.5.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-kaj6Wb4qoMuH3HySFJhxwQfe8R/sJsNJnANrvv8WdFPMoNbKY5htfNscv+LHCu5ipz+49m2e+WQXpLXr9XYemQ==",
-      "path": "microsoft.csharp/4.5.0",
-      "hashPath": "microsoft.csharp.4.5.0.nupkg.sha512"
-    },
     "Microsoft.EntityFrameworkCore/2.1.2": {
       "type": "package",
       "serviceable": true,
@@ -2984,13 +2966,6 @@
       "sha512": "sha512-vwOSUSirtgGvUD+wNsgaYrTteCrL3O+sSFCQitwLzdqT7IvCuxeQI1hG1502thtFgq56zNaGcuIGLMWA85QUnA==",
       "path": "microsoft.entityframeworkcore.analyzers/2.1.2",
       "hashPath": "microsoft.entityframeworkcore.analyzers.2.1.2.nupkg.sha512"
-    },
-    "Microsoft.EntityFrameworkCore.Design/2.1.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-Bu5c0Eec+tSW1PA0NxDgxzF0cMQjeGQC5RtBtMm3heow2J7X+2LhdkGFPr4IAL6bFLHJiVcE3csng3i6fB/PtA==",
-      "path": "microsoft.entityframeworkcore.design/2.1.1",
-      "hashPath": "microsoft.entityframeworkcore.design.2.1.1.nupkg.sha512"
     },
     "Microsoft.EntityFrameworkCore.Relational/2.1.2": {
       "type": "package",
@@ -3110,6 +3085,13 @@
       "sha512": "sha512-7ibPXI7uiKA4HknlFP0FBORHZMiF1QBroNCqr/lAD88+O9uhNpyOkbfegKhzLN9yyjQo8CXc6xfw3gx5cpwLgw==",
       "path": "mysql.data.entityframeworkcore/8.0.13",
       "hashPath": "mysql.data.entityframeworkcore.8.0.13.nupkg.sha512"
+    },
+    "MySql.Data.EntityFrameworkCore.Design/8.0.19": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-5SeMtEaPN6giRCP0HSYj3u51rWGlHL15ECax6TTG/xID2Ag4oDpxZGuQuk2zd4BFQCj7oNYeIgEHfQVFVDF4vw==",
+      "path": "mysql.data.entityframeworkcore.design/8.0.19",
+      "hashPath": "mysql.data.entityframeworkcore.design.8.0.19.nupkg.sha512"
     },
     "NETStandard.Library/1.6.1": {
       "type": "package",
@@ -4077,7 +4059,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Microsoft.CSharp.Reference/4.0.0.0": {
+    "Microsoft.CSharp/4.0.0.0": {
       "type": "referenceassembly",
       "serviceable": false,
       "sha512": ""

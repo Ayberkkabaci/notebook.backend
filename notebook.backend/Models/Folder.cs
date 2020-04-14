@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace notebook.backend.Models
 {
@@ -16,6 +17,7 @@ namespace notebook.backend.Models
         public DateTime CreatedOn { get; set; }
         public DateTime? ModifiedOn { get; set; }
 
+        [JsonIgnore]
         public Users User { get; set; }
         public ICollection<Pages> Pages { get; set; }
     }
